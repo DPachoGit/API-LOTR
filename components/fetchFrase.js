@@ -1,32 +1,82 @@
 import apiKey from "./apikey.js";
+u
+class FetchFromApi {
+  constructor() {
+    this.charactersNames = [];
+    this.characterQuote = "";
+    this.correctCharacter = "";
+    this.correctCharacterName = "";
+  }
 
-async function getData() {
-  try {
-    let response = await fetch("https://the-one-api.dev/v2/quote",{
+  async getQuotes() {
+    try {
+      let response = await fetch("https://the-one-api.dev/v2/quote", {
         headers: {
           Authorization: apiKey,
         },
-      }
-    );
-    let data = await response.json();
-    // Check if 'docs' array exists within the data object
-    if (data.docs.length > 0) {
-      let quotes = data.docs;
+      });
+      let data = await response.json();
+      return data.docs;
+    } catch (err) {
+      console.error(err);
+      return [];
+    }
+  }
 
-      // Generate a random index within the quotes array length
+  async getRandomQuote() {
+    let quotes = await this.getQuotes();
+    if (quotes.length > 0) {
       let randomIndex = Math.floor(Math.random() * quotes.length);
-
-      // Get the random character and dialog
       let randomCharacter = quotes[randomIndex].character;
       let randomDialog = quotes[randomIndex].dialog;
 
-      console.log("Random Character:", randomCharacter);
-      console.log("Random Dialog:", randomDialog);
+      this.correctCharacter = randomCharacter;
+      this.characterQuote = randomDialog;
+      console.log(this.correctCharacter);
+      console.log(this.characterQuote);
     } else {
       console.log("No data found");
     }
-  } catch {
-    console.error(error);
+  }
+
+  async fromIdToName(correctCharacter) {
+    try {
+      let response = await fetch(
+        `https://the-one-api.dev/v2/character/${correctCharacter}`,
+        {
+          headers: {
+            Authorization: apiKey,
+          },
+        }
+      );
+      let data = await response.json();
+      this.correctCharacterName = data.docs[0].name;
+      console.log(this.correctCharacterName);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async orderCalls() {
+    await this.getRandomQuote();
+    await this.fromIdToName(this.correctCharacter);
+    await this.getAllNames();
+  }
+
+  async getAllNames() {
+    try {
+      let response = await fetch("https://the-one-api.dev/v2/character", {
+        headers: {
+          Authorization: apiKey,
+        },
+      });
+      let data = await response.json();
+      this.charactersNames = data.docs.map((character) => character.name);
+      console.log(this.charactersNames);
+    } catch (err) {
+      console.error(err);
+    }
   }
 }
-getData();
+
+export default FetchFromApi
