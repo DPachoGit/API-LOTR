@@ -1,11 +1,13 @@
 import apiKey from "./apikey.js";
-u
+
 class FetchFromApi {
   constructor() {
     this.charactersNames = [];
     this.characterQuote = "";
     this.correctCharacter = "";
     this.correctCharacterName = "";
+    this.indexNombreCorrecto = 0;
+    this.arrayNombres = []
   }
 
   async getQuotes() {
@@ -61,6 +63,7 @@ class FetchFromApi {
     await this.getRandomQuote();
     await this.fromIdToName(this.correctCharacter);
     await this.getAllNames();
+    await this.sortedInfo()
   }
 
   async getAllNames() {
@@ -77,6 +80,30 @@ class FetchFromApi {
       console.error(err);
     }
   }
+
+  async sortedInfo() {
+    this.arrayNombres = [];
+  
+    // Obtener cuatro nombres aleatorios, tres de this.charactersNames y uno de this.correctCharacterName
+    const shuffledNames = this.charactersNames
+      .filter(name => name !== this.correctCharacterName) // Excluir el nombre correcto
+      .sort(() => 0.5 - Math.random()); // Ordenar de forma aleatoria
+  
+    const randomNames = shuffledNames.slice(0, 3); // Tomar los primeros tres nombres aleatorios
+  
+    const randomIndex = Math.floor(Math.random() * (randomNames.length + 1)); // Generar un índice aleatorio para insertar el nombre correcto
+    randomNames.splice(randomIndex, 0, this.correctCharacterName); // Insertar el nombre correcto en la posición aleatoria
+  
+    this.arrayNombres = randomNames;
+    this.indexNombreCorrecto = randomIndex;
+  
+    console.log(this.arrayNombres);
+    console.log(this.indexNombreCorrecto);
+  }
+
 }
+
+let qwer = new FetchFromApi;
+qwer.orderCalls();
 
 export default FetchFromApi
