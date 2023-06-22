@@ -34,7 +34,6 @@ class FetchFromApi {
 
       this.correctCharacter = randomCharacter;
       this.characterQuote = randomDialog;
-      console.log(this.correctCharacter);
       console.log(this.characterQuote);
     } else {
       console.log("No data found");
@@ -75,7 +74,6 @@ class FetchFromApi {
       });
       let data = await response.json();
       this.charactersNames = data.docs.map((character) => character.name);
-      console.log(this.charactersNames);
     } catch (err) {
       console.error(err);
     }
@@ -96,14 +94,8 @@ class FetchFromApi {
   
     this.arrayNombres = randomNames;
     this.indexNombreCorrecto = randomIndex;
-  
-    console.log(this.arrayNombres);
-    console.log(this.indexNombreCorrecto);
   }
 
 }
-
-let qwer = new FetchFromApi;
-qwer.orderCalls();
-
 export default FetchFromApi
+
