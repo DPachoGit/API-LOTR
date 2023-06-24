@@ -32,6 +32,12 @@ class FetchFromApi {
       let randomCharacter = quotes[randomIndex].character;
       let randomDialog = quotes[randomIndex].dialog;
 
+      while (randomDialog.length < 15) {
+        randomIndex = Math.floor(Math.random() * quotes.length);
+        randomCharacter = quotes[randomIndex].character;
+        randomDialog = quotes[randomIndex].dialog;
+      }
+
       this.correctCharacter = randomCharacter;
       this.characterQuote = randomDialog;
       console.log(this.characterQuote);
