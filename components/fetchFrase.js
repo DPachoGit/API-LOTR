@@ -1,6 +1,7 @@
 import apiKey from "./apikey.js";
 
 class FetchFromApi {
+  /* Guarda toda la información del fetch */
   constructor() {
     this.charactersNames = [];
     this.characterQuote = "";
@@ -9,7 +10,7 @@ class FetchFromApi {
     this.indexNombreCorrecto = 0;
     this.arrayNombres = []
   }
-
+  /* Hace fetch del las frases de las pelis */
   async getQuotes() {
     try {
       let response = await fetch("https://the-one-api.dev/v2/quote", {
@@ -24,7 +25,7 @@ class FetchFromApi {
       return [];
     }
   }
-
+  /* Coje una frase aleatoria con el id del personaje */
   async getRandomQuote() {
     let quotes = await this.getQuotes();
     if (quotes.length > 0) {
@@ -45,7 +46,7 @@ class FetchFromApi {
       console.log("No data found");
     }
   }
-
+  /* Saco el nombre con la id aleatoria que he cojido */
   async fromIdToName(correctCharacter) {
     try {
       let response = await fetch(
@@ -63,14 +64,7 @@ class FetchFromApi {
       console.error(err);
     }
   }
-
-  async orderCalls() {
-    await this.getRandomQuote();
-    await this.fromIdToName(this.correctCharacter);
-    await this.getAllNames();
-    await this.sortedInfo()
-  }
-
+  /* Hace fetch de todos los nombres de los personajes de lotr */
   async getAllNames() {
     try {
       let response = await fetch("https://the-one-api.dev/v2/character", {
@@ -84,24 +78,24 @@ class FetchFromApi {
       console.error(err);
     }
   }
-
+  /* Inserto en el array arrayNombres 3 nombres aleatorios y el correcto */
   async sortedInfo() {
-    this.arrayNombres = [];
-  
-    // Obtener cuatro nombres aleatorios, tres de this.charactersNames y uno de this.correctCharacterName
+    this.arrayNombres = [];    
     const shuffledNames = this.charactersNames
-      .filter(name => name !== this.correctCharacterName) // Excluir el nombre correcto
-      .sort(() => 0.5 - Math.random()); // Ordenar de forma aleatoria
-  
-    const randomNames = shuffledNames.slice(0, 3); // Tomar los primeros tres nombres aleatorios
-  
-    const randomIndex = Math.floor(Math.random() * (randomNames.length + 1)); // Generar un índice aleatorio para insertar el nombre correcto
-    randomNames.splice(randomIndex, 0, this.correctCharacterName); // Insertar el nombre correcto en la posición aleatoria
-  
+      .filter(name => name !== this.correctCharacterName) 
+      .sort(() => 0.5 - Math.random());   
+    const randomNames = shuffledNames.slice(0, 3);  
+    const randomIndex = Math.floor(Math.random() * (randomNames.length + 1));
+    randomNames.splice(randomIndex, 0, this.correctCharacterName);  
     this.arrayNombres = randomNames;
     this.indexNombreCorrecto = randomIndex;
   }
-
+   /* Ejecuta todoslos metodos en la clase para crear la informacion necesaria en el constructor */
+   async orderCalls() {
+    await this.getRandomQuote();
+    await this.fromIdToName(this.correctCharacter);
+    await this.getAllNames();
+    await this.sortedInfo()
+  }
 }
 export default FetchFromApi
-
