@@ -17,7 +17,7 @@ class CreateGame {
       await this.pasteNames();
       await this.updateButtonImage();
       }else if(this.winGame === true){
-        let seccionQuote = document.getElementById("quote");
+        let seccionQuote = document.getElementById("quote-section");
         seccionQuote.innerHTML = "";
         let seccionButton = document.getElementById("buttons-section");
         seccionButton.innerHTML = "";
@@ -27,7 +27,7 @@ class CreateGame {
         seccionQuote.appendChild(hCreation);
 
       }else{
-        let seccionQuote = document.getElementById("quote");
+        let seccionQuote = document.getElementById("quote-section");
         seccionQuote.innerHTML = "";
         let seccionButton = document.getElementById("buttons-section");
         seccionButton.innerHTML = "";
@@ -47,7 +47,8 @@ class CreateGame {
     let sectionClear = document.querySelector("#buttons-section");
     sectionClear.innerHTML = "";
     for (let i = 0; i < 4; i++) {
-      let button = document.createElement("button");
+      let button = document.createElement("button")
+      button.className = 'each-button'
       button.textContent = this.newfetchFromApi.arrayNombres[i];
       sectionClear.appendChild(button);
       button.addEventListener("click", () => {
@@ -86,14 +87,15 @@ class CreateGame {
       "img-6.png",
       "img-7.png",
       "img-8.png",
-      "img-9.png",    
+      "img-9.png",   
     ]
     document.body.style.backgroundImage = url(imagenes[this.puntuacionPartida]); */
-    let botones = document.querySelectorAll(".button");
+    let botones = document.querySelectorAll(".scoreTraker");
     for(let i = 0; i < 9; i++){
       botones[i].classList.remove("seleccionado");
     }
     botones[this.puntuacionPartida].classList.add("seleccionado");   
   }  
 }
+
 export default CreateGame;
