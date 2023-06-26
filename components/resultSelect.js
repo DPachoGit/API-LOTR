@@ -78,18 +78,18 @@ class CreateGame {
   }
   /* Cambia el fondo del body y el div resaltado dependiendo del index 0-9 */
   updateButtonImage() {
-    /* let imagenes = [
-      "img-1.png",
-      "img-2.png",
-      "img-3.png",
-      "img-4.png",
-      "img-5.png",
-      "img-6.png",
-      "img-7.png",
-      "img-8.png",
-      "img-9.png",   
+    let imagenes = [
+      "./assets/img/9-Sauron.jpg",   
+      "./assets/img/8-Mordor.jpg",
+      "./assets/img/7-Orthanc.jpg",
+      "./assets/img/6-Moria.jpg",
+      "./assets/img/5-Rivendel.jpg",
+      "./assets/img/4-Comarca.jpg",
+      "./assets/img/3-Los_Puertos_Grises.jpg",
+      "./assets/img/2-Numenor.jpg",
+      "./assets/img/1-Valinor.jpg",
     ]
-    document.body.style.backgroundImage = url(imagenes[this.puntuacionPartida]); */
+    document.body.style.backgroundImage = `url(${imagenes[this.puntuacionPartida]})`;
     let botones = document.querySelectorAll(".scoreTraker");
     for(let i = 0; i < 9; i++){
       botones[i].classList.remove("seleccionado");

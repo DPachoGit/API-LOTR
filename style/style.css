@@ -5,13 +5,45 @@
 }
 
 body{
-    color: darkgoldenrod;
+    color: rgb(230, 192, 95);
+    -webkit-text-stroke: .4px black;
     background-color: black;
     display: flex;
     flex-direction:column;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
     gap: 30px;
+    background-repeat:no-repeat;
+    background-size: cover;
+    background-position: center; 
 }
+
+
+.generalSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 80%;
+    height: 100vh;
+  }
+.contentContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 80%;
+    height: 40%;
+    background-color: rgba(56, 51, 51, 0.603);
+    border: 4px solid rgb(230, 192, 95);;
+}
+
+
+
 .title-section{
     display: flex;
     flex-direction: row;
@@ -19,10 +51,10 @@ body{
 }
 
 #quote{
-    font-size: 1.5em;
+    font-size: 1.7em;
 }
 
-.quote-section{
+#quote-section{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -37,7 +69,7 @@ body{
 .each-button{
   --b: 3px;   /* border thickness */
   --s: .45em; /* size of the corner */
-  --color: darkgoldenrod;
+  --color:rgb(230, 192, 95);
   
   padding: calc(.5em + var(--s)) calc(.9em + var(--s));
   color: var(--color);
@@ -78,7 +110,7 @@ body{
     width: 1em;
     height: 1em;
     margin-bottom: 0.5em;
-    border: 0.12em solid darkgoldenrod;
+    border: 0.12em solid rgb(230, 192, 95);
     border-radius: 50%;
     cursor: pointer;
     transition: border-color, transform 0.3s;
